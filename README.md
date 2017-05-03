@@ -1,2 +1,2 @@
 # RefreshChilrenComponents
-pull down refresh children components
+pull down refresh all children components
