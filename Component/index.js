@@ -35,7 +35,7 @@ export default class childComponent extends Component{
                 animating:false,
             }
         }); 
-        }, 2000);
+        }, 1000);
       }
   }
 
@@ -46,7 +46,7 @@ export default class childComponent extends Component{
       <View style ={{alignItems:'center',justifyContent:'center',height:40,}} >
       {
           animating ?  <ActivityIndicator animating={animating} color='gray' /> :
-                    <Button title={'refresh '+this.props.componentId} color='#841584' onPress={()=>this._refresh()} />
+                    <Button title={'component '+this.props.componentId} color='#841584' onPress={()=>this._refresh()} />
       }        
       </View>
     )

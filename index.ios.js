@@ -24,20 +24,20 @@ export default class RefreshChilrenComponents extends Component {
     this.components = [];
     this.components.push(<ChildComponent componentId='child1' ref={(ref)=>{ this.childs.push(ref) }} />);
     this.components.push(<ChildComponent componentId='child2' ref={(ref)=>{ this.childs.push(ref) }} />);
-     
-    this.reduxComponents = [];  
-    this.reduxComponents.push(<ChildReduxComponent />);     
+    this.components.push(<ChildReduxComponent ref={(ref)=>{ this.childs.push(ref) }} />);     
   }
 
   _onRefresh() {
       this.childs.forEach((child,index)=>{
-        child._refresh();
-      })
-      this.reduxComponents.forEach((child,index)=>{
+        let instance = child;
         if(child.getWrappedInstance) {
-            child.getWrappedInstance._refresh();
+            instance = child.getWrappedInstance();
+        } else if(child.containedApp && child.containedApp.getWrappedInstance) {
+            instance = child.containedApp.getWrappedInstance();
         }
-        
+        if(instance && instance._refresh) {
+            instance._refresh();
+        }
       })
   }
 
@@ -50,7 +50,6 @@ export default class RefreshChilrenComponents extends Component {
                   }
       >
         {this.components}
-        {this.reduxComponents}
       </ScrollView>
     );
   }

@@ -10,7 +10,7 @@ const Reducer = combineReducers({
 });
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(Reducer);
-import reduxContainer from './reduxContainer'
+import ReduxContainer from './reduxContainer'
 
 export default class Container extends Component {
   constructor(props){
@@ -20,7 +20,7 @@ export default class Container extends Component {
   render() {
     return (
         <Provider store={store}> 
-            <reduxContainer {...this.props}/>
+            <ReduxContainer ref={(ref)=>{ this.containedApp = ref; }} {...this.props}/>
         </Provider>
     );
   }

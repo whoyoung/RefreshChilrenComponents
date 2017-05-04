@@ -2,16 +2,24 @@ import React,{Component} from 'react';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 import * as allActions from './actions';
-import reduxComponent from './reduxComponent';
+import ReduxComponent from './reduxComponent';
 
 class reduxContainer extends Component {
+  componentWillUnmount(){
+    this.timeOut && clearTimeout(this.timeOut);
+  }
+
   render() {
     return (
-        <reduxComponent {...this.props}/>
+        <ReduxComponent {...this.props}/>
     );
   }
+
   _refresh() {
-      this.props.state.actions.refresh();
+    this.props.actions.refresh();
+    this.timeOut = setTimeout(()=>{
+        this.props.actions.refresh();
+    },1000);
   }
 }
 

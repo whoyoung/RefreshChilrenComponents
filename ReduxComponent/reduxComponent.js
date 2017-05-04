@@ -18,14 +18,14 @@ class Box extends Component{
     this.props.actions.refresh();
     this.timeOut = setTimeout(()=>{
         this.props.actions.refresh();
-    },2000);
+    },1000);
   }
   render(){
     let {animating} = this.props.state;
     return(
        <View style ={{alignItems:'center',justifyContent:'center',height:40,}} >
       {
-          animating ?  <ActivityIndicator animating={animating} color='gray' /> :
+          animating ?  <ActivityIndicator animating={animating} color='gray' size='large'/> :
                     <Button title='reduxComponent' color='#841584' onPress={()=>this._refresh()} />
       }        
       </View>
